@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("HierarchicalFacet2Find")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Adds hierarchical faceting to EPiServer Find's .NET API")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EPiServer")]
+[assembly: AssemblyCompany("Henrik Lindström, x2find")]
 [assembly: AssemblyProduct("HierarchicalFacet2Find")]
-[assembly: AssemblyCopyright("Copyright © EPiServer 2013")]
+[assembly: AssemblyCopyright("Copyright © x2find 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

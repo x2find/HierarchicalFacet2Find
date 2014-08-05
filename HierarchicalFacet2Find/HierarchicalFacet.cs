@@ -13,7 +13,7 @@ namespace HierarchicalFacet2Find
     public class HierarchyPath : List<HierarchyPath>
     {
         public string Path { get; set; }
-
-        public int Count { get; set; }
+        public string Name { get; set; }
+        public new int Count { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Find.HierarchicalFacet2Find;
 using Xunit;
 using EPiServer.Find;
 using System.Threading;

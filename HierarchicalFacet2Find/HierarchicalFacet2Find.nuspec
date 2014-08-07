@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>HierarchicalFacet2Find</id>
+    <version>$version$</version>
+    <title>HierarchicalFacet2Find</title>
+    <authors>Henrik Lindström</authors>
+    <owners>Henrik Lindström</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Adds hierarchical faceting to EPiServer Find's .NET API</description>
+    <copyright>Copyright 2014</copyright>
+  </metadata>
+  <files>
+    <file src="bin\Release\HierarchicalFacet2Find.dll" target="lib\net40\HierarchicalFacet2Find.dll" />
+  </files>
+</package>

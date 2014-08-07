@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Find.HierarchicalFacet2Find;
-using Xunit;
-using EPiServer.Find;
-using System.Threading;
+﻿using EPiServer.Find;
 using FluentAssertions;
 using StoryQ;
+using System.Linq;
+using System.Threading;
+using Xunit;
 
 namespace HierarchicalFacet2Find.Tests.Stories
 {

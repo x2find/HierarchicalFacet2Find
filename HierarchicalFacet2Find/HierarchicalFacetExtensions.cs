@@ -30,7 +30,7 @@ namespace HierarchicalFacet2Find
             });
         }
 
-        public static HierarchicalFacet HierarchicalFacetFor<TResult>(this IHasFacetResults<TResult> facetsResultsContainer, Expression<Func<TResult, Hierarchy>> fieldSelector)
+        public static HierarchicalFacet HierarchicalFacetFor<TResult>(this IHasFacetResults facetsResultsContainer, Expression<Func<TResult, Hierarchy>> fieldSelector)
         {
             fieldSelector.ValidateNotNullArgument("fieldSelector");
 

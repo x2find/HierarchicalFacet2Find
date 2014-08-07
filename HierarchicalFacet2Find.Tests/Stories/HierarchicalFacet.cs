@@ -99,7 +99,7 @@ namespace HierarchicalFacet2Find.Tests.Stories
         HierarchicalFacet facet;
         void IShouldGetAHierarchicalFacet()
         {
-            facet = result.HierarchicalFacetFor(x => x.Hierarchy);
+            facet = result.HierarchicalFacetFor<Document>(x => x.Hierarchy);
             facet.Should().NotBeEmpty();
         }
 

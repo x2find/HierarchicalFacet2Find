@@ -49,10 +49,10 @@ namespace HierarchicalFacet2Find
                 {
                     // traversing paths
                     var sections = termCount.Term.Split('/');
-                    var hierarchyPath = resultFacet.Where(x => x.Path.Equals(sections[0])).Single();
+                    var hierarchyPath = resultFacet.Single(x => x.Path.Equals(sections[0]));
                     for (int i = 2; i < sections.Length; i++)
                     {
-                        hierarchyPath = hierarchyPath.Where(x => x.Path.Equals(string.Join("/", sections.Take(i)))).Single();
+                        hierarchyPath = hierarchyPath.Single(x => x.Path.Equals(string.Join("/", sections.Take(i))));
                     }
 
                     hierarchyPath.Add(new HierarchyPath { Path = termCount.Term, Count = termCount.Count });

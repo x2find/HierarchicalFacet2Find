@@ -15,7 +15,7 @@ namespace HierarchicalFacet2Find
         public static ITypeSearch<TSource> HierarchicalFacetFor<TSource>(
            this ITypeSearch<TSource> search,
            Expression<Func<TSource, Hierarchy>> fieldSelector)
-        {
+        { 
             fieldSelector.ValidateNotNullArgument("fieldSelector");
 
             var facetName = fieldSelector.GetFieldPath();

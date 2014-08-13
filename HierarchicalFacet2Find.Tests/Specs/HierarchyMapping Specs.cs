@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
+﻿using EPiServer.Find.ClientConventions;
 using EPiServer.Find.Json;
 using Machine.Specifications;
-using EPiServer.Find.ClientConventions;
+using Newtonsoft.Json;
 
 namespace HierarchicalFacet2Find.Tests.Specs
 {

@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EPiServer.Find">
-      <HintPath>..\packages\EPiServer.Find.8.2.4.684\lib\net40\EPiServer.Find.dll</HintPath>
+      <HintPath>..\packages\EPiServer.Find.8.8.0.1354\lib\net40\EPiServer.Find.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <Private>True</Private>

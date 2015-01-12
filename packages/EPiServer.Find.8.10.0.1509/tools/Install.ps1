@@ -74,7 +74,7 @@ Function GetOrCreateXmlElement([System.Xml.XmlElement]$parent, $elementName, $ns
 
 [regex]$regex = '[\w\.]+,\sVersion=[\d\.]+,\sCulture=(?<culture>[\w-]+),\sPublicKeyToken=(?<publicKeyToken>\w+)'
 $ns = "urn:schemas-microsoft-com:asm.v1"
-$libPath = join-path $installPath "lib\net40"
+$libPath = join-path $installPath "lib\net45"
 $projectFile = Get-Item $project.FullName
 
 #locate the project configuration file

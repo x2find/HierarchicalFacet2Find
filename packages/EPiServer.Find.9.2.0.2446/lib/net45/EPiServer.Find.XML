@@ -81,6 +81,15 @@
             <param name="expression">The <see cref="T:System.Linq.Expressions.Expression"/> currently being visited.</param>
             <returns><see cref="T:System.Linq.Expressions.Expression"/></returns>        
         </member>
+        <member name="M:EPiServer.Find.Helpers.Text.StringExtensions.StripHtml(System.String)">
+            <summary>
+            Strips html tags from text and decodes any encoded characters.
+            This ensures that text is indexed the same way that a user reads it
+            in a browser, and enhances search over these words.
+            </summary>
+            <param name="htmlText">Text from which to strip html tags and decode encoded characters</param>
+            <returns>Decoded text free from html tags</returns>
+        </member>
         <member name="M:EPiServer.Find.QueryStringSearchExtensions.InAllField``2(EPiServer.Find.IQueriedSearch{``0,``1})">
             <summary>
             Adds the _all field to the list of fields to search in.
@@ -124,6 +133,28 @@
         <member name="M:EPiServer.Find.QueryStringSearchExtensions.UsingSynonyms``1(EPiServer.Find.IQueriedSearch{``0})">
             <summary>
             If the client has an admin index, adds synonym analyzer to query.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Find.UnifiedSearch.HitProjection.SpecTitleProjection">
+            <summary>
+            Title projection that takes a HitSpecification parameter.
+            Used to change the behaviour of e.g. encoding.
+            By default it uses TitleProjection if set, otherwise it encodes the title.
+            To override the encoding behaviour, simply set TitleProjection
+            </summary>
+        </member>
+        <member name="P:EPiServer.Find.UnifiedSearch.HitSpecification.EncodeTitle">
+            <summary>
+            Toggle the ability to encode the title.
+            Default behaviour is True: encoding enabled.
+            Set to False to disable encoding.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Find.UnifiedSearch.HitSpecification.EncodeExcerpt">
+            <summary>
+            Toggle the ability to encode the excerpt.
+            Default behaviour is True: encoding enabled.
+            Set to False to disable encoding.
             </summary>
         </member>
         <member name="T:EPiServer.Find.UnifiedSearch.HitOriginalTypeProjectionProcessor">

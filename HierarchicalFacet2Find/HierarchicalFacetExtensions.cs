@@ -38,6 +38,10 @@ namespace HierarchicalFacet2Find
             var facet = facetsResultsContainer.Facets[facetName] as TermsFacet;
 
             var resultFacet = new HierarchicalFacet();
+
+            if (facet == null)
+                return resultFacet;
+
             foreach (var termCount in facet)
             {
                 if (!termCount.Term.Contains('/'))

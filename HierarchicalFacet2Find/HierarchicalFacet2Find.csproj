@@ -42,9 +42,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPiServer.Find, Version=9.6.0.3185, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+    <Reference Include="EPiServer.Find, Version=10.0.0.3291, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EPiServer.Find.9.6.0.3185\lib\net45\EPiServer.Find.dll</HintPath>
+      <HintPath>..\packages\EPiServer.Find.10.0.0.3291\lib\net45\EPiServer.Find.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <Private>True</Private>

@@ -18,23 +18,26 @@ namespace HierarchicalFacet2Find
            this ITypeSearch<TSource> search,
            Expression<Func<TSource, Hierarchy>> fieldSelector)
         {
-            fieldSelector.ValidateNotNullArgument("fieldSelector");
+            fieldSelector.ValidateNotNullArgument(nameof(fieldSelector));
 
             var facetName = fieldSelector.GetFieldPath();
             var fieldName = search.Client.Conventions.FieldNameConvention.GetFieldName(fieldSelector);
+
             return new Search<TSource, IQuery>(search, context =>
             {
-                var facetRequest = new ExtendedTermsFacetRequest(facetName);
-                facetRequest.Field = fieldName;
-                facetRequest.Order = "term";
-                facetRequest.Size = 1000;
+                var facetRequest = new ExtendedTermsFacetRequest(facetName)
+                {
+                    Field = fieldName, Order = "term", Size = 1000
+                };
+
                 context.RequestBody.Facets.Add(facetRequest);
             });
         }
 
-        public static HierarchicalFacet HierarchicalFacetFor<TResult>(this IHasFacetResults<TResult> facetsResultsContainer, Expression<Func<TResult, Hierarchy>> fieldSelector)
+        public static HierarchicalFacet HierarchicalFacetFor<TResult>(
+            this IHasFacetResults<TResult> facetsResultsContainer, Expression<Func<TResult, Hierarchy>> fieldSelector)
         {
-            fieldSelector.ValidateNotNullArgument("fieldSelector");
+            fieldSelector.ValidateNotNullArgument(nameof(fieldSelector));
 
             var facetName = fieldSelector.GetFieldPath();
             var facet = facetsResultsContainer.Facets[facetName] as TermsFacet;
@@ -64,17 +67,26 @@ namespace HierarchicalFacet2Find
             return resultFacet;
         }
 
-        public static ITypeSearch<TSource> HierarchicalFacetFor<TSource, TListItem>(this ITypeSearch<TSource> search, Expression<Func<TSource, IEnumerable<TListItem>>> enumerableFieldSelector, Expression<Func<TListItem, string>> itemFieldSelector, Expression<Func<TListItem, Filter>> filterExpression = null, Action<NestedTermsFacetRequest> facetRequestAction = null)
+        public static ITypeSearch<TSource> HierarchicalFacetFor<TSource, TListItem>(this ITypeSearch<TSource> search,
+            Expression<Func<TSource, IEnumerable<TListItem>>> enumerableFieldSelector,
+            Expression<Func<TListItem, string>> itemFieldSelector,
+            Expression<Func<TListItem, Filter>> filterExpression = null,
+            Action<NestedTermsFacetRequest> facetRequestAction = null)
         {
             var filter = NestedFilter.Create(search.Client.Conventions, enumerableFieldSelector, filterExpression);
+
             var action = !facetRequestAction.IsNotNull() ? x => x.FacetFilter = filter : new Action<NestedTermsFacetRequest>(x => {
                 x.FacetFilter = filter;
                 facetRequestAction(x);
             });
+
             return search.AddNestedHierarchicalFacetFor(enumerableFieldSelector, itemFieldSelector, action);
         }
 
-        public static HierarchicalFacet HierarchicalFacetFor<TResult, TEnumerableItem>(this IHasFacetResults<TResult> facetsResultsContainer, Expression<Func<TResult, IEnumerable<TEnumerableItem>>> enumerableFieldSelector, Expression<Func<TEnumerableItem, string>> itemFieldSelector)
+        public static HierarchicalFacet HierarchicalFacetFor<TResult, TEnumerableItem>(
+            this IHasFacetResults<TResult> facetsResultsContainer,
+            Expression<Func<TResult, IEnumerable<TEnumerableItem>>> enumerableFieldSelector,
+            Expression<Func<TEnumerableItem, string>> itemFieldSelector)
         {
             enumerableFieldSelector.ValidateNotNullArgument(nameof(enumerableFieldSelector));
             itemFieldSelector.ValidateNotNullArgument(nameof(itemFieldSelector));
@@ -82,8 +94,8 @@ namespace HierarchicalFacet2Find
             string fieldPath = string.Concat(enumerableFieldSelector.GetFieldPath(), enumerableFieldSelector.GetFieldPath().Length > 0 ? "." : "",
                 itemFieldSelector.GetFieldPath());
 
-            TermsFacet facet = facetsResultsContainer.Facets[fieldPath] as TermsFacet;
-            HierarchicalFacet hierarchicalFacet = new HierarchicalFacet();
+            var facet = facetsResultsContainer.Facets[fieldPath] as TermsFacet;
+            var hierarchicalFacet = new HierarchicalFacet();
 
             foreach (var termCount in facet.OrderBy(x => x.Term.Count(c => c == '/')))
             {
@@ -132,7 +144,9 @@ namespace HierarchicalFacet2Find
             return hierarchicalFacet;
         }
 
-        private static ITypeSearch<TSource> AddNestedHierarchicalFacetFor<TSource>(this ITypeSearch<TSource> search, Expression enumerableFieldSelector, Expression itemFieldSelector, Action<NestedTermsFacetRequest> facetRequestAction)
+        private static ITypeSearch<TSource> AddNestedHierarchicalFacetFor<TSource>(this ITypeSearch<TSource> search,
+            Expression enumerableFieldSelector, Expression itemFieldSelector,
+            Action<NestedTermsFacetRequest> facetRequestAction)
         {
             enumerableFieldSelector.ValidateNotNullArgument(nameof(enumerableFieldSelector));
             itemFieldSelector.ValidateNotNullArgument(nameof(itemFieldSelector));

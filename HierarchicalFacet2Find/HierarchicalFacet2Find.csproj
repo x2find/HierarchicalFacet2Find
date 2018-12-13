@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Facets\ExtendedNestedTermsFacetRequest.cs" />
     <Compile Include="Api\Facets\ExtendedTermsFacetRequest.cs" />
     <Compile Include="HierarchicalFacet.cs" />
     <Compile Include="HierarchicalFacetExtensions.cs" />

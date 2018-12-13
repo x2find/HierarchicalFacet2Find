@@ -9,8 +9,14 @@ namespace HierarchicalFacet2Find
 
     public class HierarchyPath : List<HierarchyPath>
     {
-        public string Path { get; set; }
+        public HierarchyPath(string path, int count)
+        {
+            Path = path;
+            Count = count;
+        }
 
-        public new int Count { get; set; }
+        public string Path { get; }
+
+        public new int Count { get; }
     }
 }

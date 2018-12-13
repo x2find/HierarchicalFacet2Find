@@ -43,25 +43,10 @@ namespace HierarchicalFacet2Find
             var facet = facetsResultsContainer.Facets[facetName] as TermsFacet;
 
             var resultFacet = new HierarchicalFacet();
+
             foreach (var termCount in facet)
             {
-                if (!termCount.Term.Contains('/'))
-                {
-                    // create top path
-                    resultFacet.Add(new HierarchyPath { Path = termCount.Term, Count = termCount.Count });
-                }
-                else
-                {
-                    // traversing paths
-                    var sections = termCount.Term.Split('/');
-                    var hierarchyPath = resultFacet.Where(x => x.Path.Equals(sections[0])).Single();
-                    for (int i = 2; i < sections.Length; i++)
-                    {
-                        hierarchyPath = hierarchyPath.Where(x => x.Path.Equals(string.Join("/", sections.Take(i)))).Single();
-                    }
-
-                    hierarchyPath.Add(new HierarchyPath { Path = termCount.Term, Count = termCount.Count });
-                }
+                AddHierarchyPath(resultFacet, termCount);
             }
 
             return resultFacet;
@@ -95,53 +80,50 @@ namespace HierarchicalFacet2Find
                 itemFieldSelector.GetFieldPath());
 
             var facet = facetsResultsContainer.Facets[fieldPath] as TermsFacet;
-            var hierarchicalFacet = new HierarchicalFacet();
+            var resultFacet = new HierarchicalFacet();
 
             foreach (var termCount in facet.OrderBy(x => x.Term.Count(c => c == '/')))
             {
-                if (string.IsNullOrEmpty(termCount.Term))
-                {
-                    continue;
-                }
-
-                if (!termCount.Term.Contains('/'))
-                {
-                    hierarchicalFacet.Add(new HierarchyPath
-                    {
-                        Path = termCount.Term,
-                        Count = termCount.Count
-                    });
-
-                    continue;
-                }
-
-                string[] sections = termCount.Term.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (!sections.Any())
-                {
-                    continue;
-                }
-
-                var hierarchyPath = hierarchicalFacet.FirstOrDefault(x => x.Path.Equals(sections[0]));
-
-                if (hierarchyPath == null)
-                {
-                    continue;
-                }
-
-                for (int i = 2; i < sections.Length; ++i)
-                {
-                    hierarchyPath = hierarchyPath.Single(x => x.Path.Equals(string.Join("/", sections.Take(i))));
-                }
-
-                hierarchyPath.Add(new HierarchyPath
-                {
-                    Path = termCount.Term,
-                    Count = termCount.Count
-                });
+                AddHierarchyPath(resultFacet, termCount);
             }
 
-            return hierarchicalFacet;
+            return resultFacet;
+        }
+
+        private static void AddHierarchyPath(HierarchicalFacet hierarchicalFacet, TermCount termCount)
+        {
+            if (string.IsNullOrEmpty(termCount.Term))
+            {
+                return;
+            }
+
+            // create top path
+            if (!termCount.Term.Contains('/'))
+            {
+                hierarchicalFacet.Add(new HierarchyPath(termCount.Term, termCount.Count));
+            }
+
+            // traversing paths
+            string[] sections = termCount.Term.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (!sections.Any())
+            {
+                return;
+            }
+
+            var hierarchyPath = hierarchicalFacet.FirstOrDefault(x => x.Path.Equals(sections[0]));
+
+            if (hierarchyPath == null)
+            {
+                return;
+            }
+
+            for (int i = 2; i < sections.Length; ++i)
+            {
+                hierarchyPath = hierarchyPath.Single(x => x.Path.Equals(string.Join("/", sections.Take(i))));
+            }
+
+            hierarchyPath.Add(new HierarchyPath(termCount.Term, termCount.Count));
         }
 
         private static ITypeSearch<TSource> AddNestedHierarchicalFacetFor<TSource>(this ITypeSearch<TSource> search,

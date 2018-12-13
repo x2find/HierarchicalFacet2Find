@@ -101,6 +101,7 @@ namespace HierarchicalFacet2Find
             if (!termCount.Term.Contains('/'))
             {
                 hierarchicalFacet.Add(new HierarchyPath(termCount.Term, termCount.Count));
+                return;
             }
 
             // traversing paths

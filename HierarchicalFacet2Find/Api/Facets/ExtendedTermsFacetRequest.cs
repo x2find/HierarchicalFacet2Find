@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EPiServer.Find.Api.Facets;
+﻿using EPiServer.Find.Api.Facets;
 using Newtonsoft.Json;
 
 namespace HierarchicalFacet2Find.Api.Facets
 {
-    class ExtendedTermsFacetRequest : TermsFacetRequest
+    internal class ExtendedTermsFacetRequest : TermsFacetRequest
     {
         public ExtendedTermsFacetRequest(string name) 
             : base(name)

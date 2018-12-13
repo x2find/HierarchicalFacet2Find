@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Xunit;
 using EPiServer.Find;
 using System.Threading;
@@ -108,54 +105,54 @@ namespace HierarchicalFacet2Find.Tests.Stories
 
         void IShouldGetAHierarchicalFacetWithPathAAndCount2()
         {
-            facet.Where(x => x.Path.Equals("A")).Single().Count.Should().Be(2);
+            facet.Single(x => x.Path.Equals("A")).Count.Should().Be(2);
         }
 
         void IShouldGetAHierarchicalFacetWithPathABAndCount2()
         {
-            facet.Where(x => x.Path.Equals("A")).Single()
-                .Where(x => x.Path.Equals("A/B")).Single().Count.Should().Be(2);
+            facet.Single(x => x.Path.Equals("A"))
+                 .Single(x => x.Path.Equals("A/B")).Count.Should().Be(2);
         }
 
         void IShouldGetAHierarchicalFacetWithPathABCAndCount2()
         {
-            facet.Where(x => x.Path.Equals("A")).Single()
-                .Where(x => x.Path.Equals("A/B")).Single()
-                .Where(x => x.Path.Equals("A/B/C")).Single().Count.Should().Be(2);
+            facet.Single(x => x.Path.Equals("A"))
+                .Single(x => x.Path.Equals("A/B"))
+                 .Single(x => x.Path.Equals("A/B/C")).Count.Should().Be(2);
         }
 
         void IShouldGetAHierarchicalFacetWithPathABCDAndCount1()
         {
-            facet.Where(x => x.Path.Equals("A")).Single()
-                .Where(x => x.Path.Equals("A/B")).Single()
-                .Where(x => x.Path.Equals("A/B/C")).Single()
-                .Where(x => x.Path.Equals("A/B/C/D")).Single().Count.Should().Be(1);
+            facet.Single(x => x.Path.Equals("A"))
+                 .Single(x => x.Path.Equals("A/B"))
+                 .Single(x => x.Path.Equals("A/B/C"))
+                 .Single(x => x.Path.Equals("A/B/C/D")).Count.Should().Be(1);
         }
 
         void IShouldGetAHierarchicalFacetWithPathABCEAndCount1()
         {
-            facet.Where(x => x.Path.Equals("A")).Single()
-                .Where(x => x.Path.Equals("A/B")).Single()
-                .Where(x => x.Path.Equals("A/B/C")).Single()
-                .Where(x => x.Path.Equals("A/B/C/E")).Single().Count.Should().Be(1);
+            facet.Single(x => x.Path.Equals("A"))
+                 .Single(x => x.Path.Equals("A/B"))
+                 .Single(x => x.Path.Equals("A/B/C"))
+                 .Single(x => x.Path.Equals("A/B/C/E")).Count.Should().Be(1);
         }
 
         void IShouldGetAHierarchicalFacetWithPathKAndCount1()
         {
-            facet.Where(x => x.Path.Equals("K")).Single().Count.Should().Be(1);
+            facet.Single(x => x.Path.Equals("K")).Count.Should().Be(1);
         }
 
         void IShouldGetAHierarchicalFacetWithPathKLAndCount1()
         {
-            facet.Where(x => x.Path.Equals("K")).Single()
-                .Where(x => x.Path.Equals("K/L")).Single().Count.Should().Be(1);
+            facet.Single(x => x.Path.Equals("K"))
+                 .Single(x => x.Path.Equals("K/L")).Count.Should().Be(1);
         }
 
         void IShouldGetAHierarchicalFacetWithPathKLMAndCount1()
         {
-            facet.Where(x => x.Path.Equals("K")).Single()
-                .Where(x => x.Path.Equals("K/L")).Single()
-                .Where(x => x.Path.Equals("K/L/M")).Single().Count.Should().Be(1);
+            facet.Single(x => x.Path.Equals("K"))
+                 .Single(x => x.Path.Equals("K/L"))
+                 .Single(x => x.Path.Equals("K/L/M")).Count.Should().Be(1);
         }
 
         public class Document

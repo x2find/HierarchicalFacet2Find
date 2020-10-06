@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HierarchicalFacet2Find", "HierarchicalFacet2Find\HierarchicalFacet2Find.csproj", "{189B3257-492F-4D06-B3D5-3BE6177507EB}"
 EndProject
@@ -11,6 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3A7FE190
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HierarchicalFacet2Find.Tests", "HierarchicalFacet2Find.Tests\HierarchicalFacet2Find.Tests.csproj", "{5ED3EACD-18A4-4BF2-81E2-86FEC4D5739E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{8EED9620-4B98-4693-9AEC-8AA7082DE7C4}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,17 +24,20 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{189B3257-492F-4D06-B3D5-3BE6177507EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{189B3257-492F-4D06-B3D5-3BE6177507EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{189B3257-492F-4D06-B3D5-3BE6177507EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{189B3257-492F-4D06-B3D5-3BE6177507EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189B3257-492F-4D06-B3D5-3BE6177507EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5ED3EACD-18A4-4BF2-81E2-86FEC4D5739E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5ED3EACD-18A4-4BF2-81E2-86FEC4D5739E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5ED3EACD-18A4-4BF2-81E2-86FEC4D5739E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5ED3EACD-18A4-4BF2-81E2-86FEC4D5739E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED3EACD-18A4-4BF2-81E2-86FEC4D5739E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5ED3EACD-18A4-4BF2-81E2-86FEC4D5739E} = {3A7FE190-0118-4F18-8C5C-4472E578B191}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51E0B790-F2FC-4D7B-A66C-F6F0C41DA582}
 	EndGlobalSection
 EndGlobal

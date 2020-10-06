@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>HierarchicalFacet2Find</id>
-    <version>$version$</version>
+    <version>1.0.0</version>
     <title>HierarchicalFacet2Find</title>
     <authors>Henrik Lindström</authors>
     <owners>Henrik Lindström</owners>

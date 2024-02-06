@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EPiServer.Find;
+﻿using EPiServer.Find;
+using EPiServer.Find.Api.Facets;
+using EPiServer.Find.Api.Querying;
 using EPiServer.Find.Helpers;
 using EPiServer.Find.Helpers.Reflection;
-using System.Linq.Expressions;
-using EPiServer.Find.Api.Querying;
 using HierarchicalFacet2Find.Api.Facets;
-using EPiServer.Find.Api.Facets;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace HierarchicalFacet2Find
 {
@@ -17,7 +15,7 @@ namespace HierarchicalFacet2Find
         public static ITypeSearch<TSource> HierarchicalFacetFor<TSource>(
            this ITypeSearch<TSource> search,
            Expression<Func<TSource, Hierarchy>> fieldSelector)
-        {
+        { 
             fieldSelector.ValidateNotNullArgument("fieldSelector");
 
             var facetName = fieldSelector.GetFieldPath();
@@ -32,7 +30,7 @@ namespace HierarchicalFacet2Find
             });
         }
 
-        public static HierarchicalFacet HierarchicalFacetFor<TResult>(this IHasFacetResults<TResult> facetsResultsContainer, Expression<Func<TResult, Hierarchy>> fieldSelector)
+        public static HierarchicalFacet HierarchicalFacetFor<TResult>(this IHasFacetResults facetsResultsContainer, Expression<Func<TResult, Hierarchy>> fieldSelector)
         {
             fieldSelector.ValidateNotNullArgument("fieldSelector");
 
@@ -40,6 +38,10 @@ namespace HierarchicalFacet2Find
             var facet = facetsResultsContainer.Facets[facetName] as TermsFacet;
 
             var resultFacet = new HierarchicalFacet();
+
+            if (facet == null)
+                return resultFacet;
+
             foreach (var termCount in facet)
             {
                 if (!termCount.Term.Contains('/'))
@@ -51,10 +53,10 @@ namespace HierarchicalFacet2Find
                 {
                     // traversing paths
                     var sections = termCount.Term.Split('/');
-                    var hierarchyPath = resultFacet.Where(x => x.Path.Equals(sections[0])).Single();
+                    var hierarchyPath = resultFacet.Single(x => x.Path.Equals(sections[0]));
                     for (int i = 2; i < sections.Length; i++)
                     {
-                        hierarchyPath = hierarchyPath.Where(x => x.Path.Equals(string.Join("/", sections.Take(i)))).Single();
+                        hierarchyPath = hierarchyPath.Single(x => x.Path.Equals(string.Join("/", sections.Take(i))));
                     }
 
                     hierarchyPath.Add(new HierarchyPath { Path = termCount.Term, Count = termCount.Count });

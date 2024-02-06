@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
-using EPiServer.Find;
-using System.Threading;
+﻿using EPiServer.Find;
 using FluentAssertions;
 using StoryQ;
+using System.Linq;
+using System.Threading;
+using Xunit;
 
 namespace HierarchicalFacet2Find.Tests.Stories
 {
@@ -102,7 +99,7 @@ namespace HierarchicalFacet2Find.Tests.Stories
         HierarchicalFacet facet;
         void IShouldGetAHierarchicalFacet()
         {
-            facet = result.HierarchicalFacetFor(x => x.Hierarchy);
+            facet = result.HierarchicalFacetFor<Document>(x => x.Hierarchy);
             facet.Should().NotBeEmpty();
         }
 

@@ -1,25 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace HierarchicalFacet2Find
 {
     public class Hierarchy : List<string>
     {
-        public static implicit operator Hierarchy(string hierarchy)
+
+        public static implicit operator Hierarchy(string h1)
         {
             var property = new Hierarchy();
-            var sections = hierarchy.Split('/');
-            var concatenatedSections = sections[0];
-            for(int i = 1; i < sections.Length; i++)
-            {
-                property.Add(concatenatedSections);
-                concatenatedSections += "/" + sections[i];
-            }
 
-            // add full path last
-            property.Add(hierarchy);
+            var section1 = h1.Split('#');
+
+            foreach (var h2 in section1)
+            {
+                var sections = h2.Split('/');
+                var concatenatedSections = sections[0];
+                for (int i = 1; i < sections.Length; i++)
+                {
+                    if (!string.IsNullOrWhiteSpace(concatenatedSections))
+                        property.Add(concatenatedSections);
+                    concatenatedSections += "/" + sections[i];
+                }
+
+                // add full path last
+                if (!string.IsNullOrWhiteSpace(h2))
+                    property.Add(h2);
+            }
 
             return property;
         }
